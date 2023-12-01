@@ -77,6 +77,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 7581491494317202411, guid: 03750dda2a3e574d7a5f68b951378200, type: 3}
   speed: 1000
+  shootingSound: {fileID: 8300000, guid: 41d50d7be45670148a59cfe5c68e00cb, type: 3}
+  source: {fileID: 0}
 --- !u!1 &7175728556462759705
 GameObject:
   m_ObjectHideFlags: 0
