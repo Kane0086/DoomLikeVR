@@ -337,8 +337,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 7581491494317202411, guid: 03750dda2a3e574d7a5f68b951378200, type: 3}
-  speed: 100
-  delay: 0.5
+  speed: 1000
+  delay: 0.1
 --- !u!1001 &6013748315528904167
 PrefabInstance:
   m_ObjectHideFlags: 0

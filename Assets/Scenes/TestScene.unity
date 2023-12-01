@@ -947,6 +947,10 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 452463680}
+    - target: {fileID: 7136713498299322062, guid: 48fa008dd309b8b4d9f32ef713ba8778, type: 3}
+      propertyPath: speed
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 8015263114364617203, guid: 48fa008dd309b8b4d9f32ef713ba8778, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.5329523
