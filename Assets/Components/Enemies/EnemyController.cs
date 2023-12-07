@@ -46,7 +46,6 @@ public class EnemyController : MonoBehaviour
             if (timer > delay)
             {
                 animator.SetBool("Attack", true);
-                //animator.Play("Solider_1_Shoot");
                 shoot();
                 timer = 0;
             }
