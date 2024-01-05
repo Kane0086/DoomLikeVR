@@ -17,13 +17,14 @@ public class MinotorController : MonoBehaviour
     private float timer;
     private bool start_animation_run = false;
     private bool start_animation_shoot = false;
+    private Rigidbody self_body;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         pos = GetComponent<Transform>();
         animator = GetComponent<Animator>();
-
+        self_body = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -40,7 +41,9 @@ public class MinotorController : MonoBehaviour
         else
         {
             agent.isStopped = true;
+            agent.ResetPath();
             animator.SetBool("Walk", false);
+            self_body.velocity.Set(0, 0, 0);
             animator.SetBool("Shoot", false);
             if (timer > delay)
             {

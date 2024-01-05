@@ -18,13 +18,14 @@ public class EnemyController : MonoBehaviour
     private float timer;
     private bool start_animation_run = false;
     private bool start_animation_shoot = false;
+    private Rigidbody self_body;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         pos = GetComponent<Transform>();
         animator = GetComponent<Animator>();
-
+        self_body = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -40,8 +41,10 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            agent.isStopped = true;
             animator.SetBool("IsMoving", false);
+            agent.ResetPath();
+            self_body.velocity.Set(0, 0, 0);
+            agent.isStopped = true;
             animator.SetBool("Attack", false);
             if (timer > delay)
             {
