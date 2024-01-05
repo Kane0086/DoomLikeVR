@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(AudioSource))]
-public class AutomaticShooting : MonoBehaviour
+public class AutomaticShooting : GunBehavior
 {
     public GameObject bullet;
     public float speed;
@@ -29,8 +30,9 @@ public class AutomaticShooting : MonoBehaviour
         isActivate = false;
     }
 
-    void Update()
+    protected override sealed void Update()
     {
+        base.Update();
         timer += Time.deltaTime;
         if (isActivate && timer > delay) {
             Shooting();
@@ -40,12 +42,16 @@ public class AutomaticShooting : MonoBehaviour
 
     private void Shooting()
     {
+        if (_isReloading == true)
+            return;
+        if (loaded <= 0)
+            Reload();
         source.PlayOneShot(shootingSound);
         var obj = Instantiate(bullet, transform.position, transform.rotation);
+        loaded -= 1;
         var rb = obj.GetComponent<Rigidbody>();
         var front = obj.transform.Find("Front");
         rb.velocity = (front.position - rb.gameObject.transform.position) * speed;
-        print(rb.velocity);
         Destroy(obj, 5);
     }
 }
