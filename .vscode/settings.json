@@ -2,13 +2,9 @@
     "files.exclude": {
         "**/.DS_Store": true,
         "**/.git": true,
-<<<<<<< HEAD
         "**/.vs": true,
         "**/.gitmodules": true,
         "**/.vsconfig": true,
-=======
-        "**/.gitmodules": true,
->>>>>>> feature/enemy
         "**/*.booproj": true,
         "**/*.pidb": true,
         "**/*.suo": true,
@@ -53,7 +49,6 @@
         "library/": true,
         "obj/": true,
         "Obj/": true,
-<<<<<<< HEAD
         "Logs/": true,
         "logs/": true,
         "ProjectSettings/": true,
@@ -62,11 +57,4 @@
         "Temp/": true
     },
     "dotnet.defaultSolution": "DoomLikeVR.sln"
-=======
-        "ProjectSettings/": true,
-        "temp/": true,
-        "Temp/": true
-    },
-    "dotnet.defaultSolution": "DoomLikeVr.sln"
->>>>>>> feature/enemy
 }

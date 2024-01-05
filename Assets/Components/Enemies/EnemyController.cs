@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-
+    public int healthPoints = 50;
     public Transform player;
     private NavMeshAgent agent;
     private Transform pos;
@@ -16,16 +17,19 @@ public class EnemyController : MonoBehaviour
     private Animator animator;
     private float delay = 1;
     private float timer;
-    private bool start_animation_run = false;
-    private bool start_animation_shoot = false;
-    private Rigidbody self_body;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         pos = GetComponent<Transform>();
         animator = GetComponent<Animator>();
-        self_body = GetComponent<Rigidbody>();
+        player = GameObject.Find("PlayerVR").transform.Find("XR Origin (XR Rig)");
+    }
+
+    void OnCollisionEnter(UnityEngine.Collision collision)
+    {
+        if (collision.gameObject.CompareTag("PlayerBullet"))
+            healthPoints -= 5;
     }
 
     // Update is called once per frame
@@ -33,17 +37,16 @@ public class EnemyController : MonoBehaviour
     {
         timer += Time.deltaTime;
         float distance = Vector3.Distance(player.transform.position, pos.transform.position);
-        if (distance > 20 || SeePlayer() == false)
+        if (distance > 15 || SeePlayer() == false)
         {
-            agent.SetDestination(player.position);
             animator.SetBool("IsMoving", true);
             animator.SetBool("Attack", false);
+            agent.isStopped = false;
+            agent.SetDestination(player.position);
         }
         else
         {
             animator.SetBool("IsMoving", false);
-            agent.ResetPath();
-            self_body.velocity.Set(0, 0, 0);
             agent.isStopped = true;
             animator.SetBool("Attack", false);
             if (timer > delay)
@@ -53,6 +56,8 @@ public class EnemyController : MonoBehaviour
                 timer = 0;
             }
         }
+        if (healthPoints <= 0)
+            Destroy(gameObject);
     }
 
     void shoot()
@@ -70,18 +75,8 @@ public class EnemyController : MonoBehaviour
         var rayDirection = player.position - pos.position;
         RaycastHit hit;
 
-        print(rayDirection);
         if (Physics.Raycast(pos.position, rayDirection, out hit))
-        {
-            if (hit.transform == player)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+            return hit.transform == player;
         return false;
     }
 }

@@ -17,7 +17,6 @@ public class GunBehavior : MonoBehaviour
         _reloadTimer += Time.deltaTime;
         if (_isReloading == true && _reloadTimer >= reloadDelay) {
             _isReloading = false;
-            print("Here");
         }
     }
 

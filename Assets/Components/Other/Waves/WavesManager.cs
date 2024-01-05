@@ -18,8 +18,12 @@ public class WaveManager : MonoBehaviour
     private float _spawnTimer;
     void FixedUpdate()
     {
-        while (_enemies.Remove(null)) ;
+        _enemies.RemoveAll(obj => obj == null);
 
+        print("- WAVES -------------------");
+        print("Timer : " + _timer);
+        print("Enemies Left : " + _enemies.Count);
+        print("Temporary Enemies Left : " + _temporaryList.Count);
         if (_enemies.Count == 0)
         {
             _timer += Time.deltaTime;
@@ -35,7 +39,7 @@ public class WaveManager : MonoBehaviour
         if (_temporaryList.Count != 0)
         {
             _spawnTimer += Time.deltaTime;
-            if (_spawnTimer >= 5)
+            if (_spawnTimer >= 2)
             {   
                 SpawnEnemies();
                 _spawnTimer = 0;
